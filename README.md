@@ -16,13 +16,13 @@ The SIGINT signal (Ctrl + C) should stop the currently performed copy operation 
 
 ## How to run program
 
-- Paso 1
+- Step 1
 
   ```bash
   gcc -o recursive_copy recursive_copy.c
   ```
 
-- Paso 2
+- Step 2
 
   Note that if `./test_dir/destination` already exists you shoukd either delete it or change the destination directory.
 
