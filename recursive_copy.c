@@ -10,6 +10,7 @@
 #include <errno.h>
 #include <syslog.h>
 #include <limits.h>
+#include <utime.h>
 
 #define BUFFER_SIZE 1024
 
@@ -69,6 +70,15 @@ void copy_file(const char *source, const char *destination)
     if (fchmod(dest_fd, st.st_mode) == -1)
     {
       perror("Error setting file mode");
+      exit(EXIT_FAILURE);
+    }
+    struct utimbuf new_times;
+    new_times.actime = st.st_atime;
+    new_times.modtime = st.st_mtime;
+
+    if (utime(destination, &new_times) == -1)
+    {
+      perror("Error setting file access times");
       exit(EXIT_FAILURE);
     }
   }
